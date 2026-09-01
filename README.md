@@ -5,8 +5,10 @@ Turn any pixel-art image — real or AI-generated — into clean game sprites, n
 <p align="center">
   <img src="examples/girl/screenshot.png" width="420">
   <img src="examples/girl/out/girl_stand_8x.png" height="300">
+  <img src="examples/girl/out/girl_walk_clear.gif" height="300">
   <img src="examples/girl/out/girl_walk.gif" height="300">
 </p>
+<p align="center"><sub>screenshot → clean standing sprite → shy walk (true colours on transparent, and on the dark preview background)</sub></p>
 
 What it does:
 

@@ -79,6 +79,8 @@ for y, (x0, s) in {25: (11, 'ODD'), 26: (11, 'OSDO'), 27: (12, 'OSDO'), 28: (12,
 upper = lower_eyes(upper, eyes_mask(upper, 18, 27, 12, 15))
 walk_frames = walk_cycle(upper, PROFILE_LEG, far_x=17, near_x=14, hair=light_mask(upper) & upper.box(0, 12, 16, 26), sink_rows=37)
 export.gif(walk_frames, f"{OUT}/girl_walk.gif", ms=111); export.spritesheet(walk_frames, f"{OUT}/girl_walk_sheet.png")
+export.gif(walk_frames, f"{OUT}/girl_walk_clear.gif", ms=111, bg=None)          # true colours, transparent background
+export.gif(stand_frames, f"{OUT}/girl_stand_idle_clear.gif", ms=110, bg=None)
 
 # ---------- 5. back into her own screen: paint her out, then idle → walk → idle along the floor, no skating
 bg = paint_out(SHOT, cut, origin, bg=(23, 10, 30)).resize((1920, 1080), Image.LANCZOS)
