@@ -68,6 +68,22 @@ PROFILE_LEG = Limb(
     palette=LEG_PALETTE,
 )
 
+# The far leg: one skin column narrower, no highlight (it's in the near leg's shadow), shorter boot.
+PROFILE_LEG_FAR = Limb(
+    start_row=37,
+    rows={37: '2cd42', 38: '2dd42', 39: '2dd42', 40: '2kd42',
+          41: '.2d42', 42: '.2d42', 43: '.2d42', 44: '.2d42',
+          45: '.2l92', 46: '.2792'},
+    feet={'flat':   {0: '2h115.', 1: '2h5005', 2: 'iiiiii'},
+          'heelup': {0: '2h11..', 1: '.2h55.', 2: '..2005', 3: '...iii'},
+          'lift':   {0: '2h115.', 1: '.2h50.', 2: '..2ii.'}},
+    palette=LEG_PALETTE,
+)
+
+# DEPTH: the leg on the camera side is the NEAR leg — drawn last, full width. A character facing screen-right
+# shows her LEFT side, so her left leg is near and sits on screen-LEFT; the right leg is far, on screen-right,
+# narrower and partly hidden behind the near leg's boot. (Facing left: mirror all of that.)
+
 # per-row x offsets for the 13 leg rows (37..49). contact → recoil → pass, then the other leg.
 WALK_POSES = {
     'STAND': Pose([0] * 13),
@@ -86,12 +102,14 @@ WALK_STRIDE = 3
 
 
 def walk_cycle(upper: Sprite, limb: Limb, far_x: int, near_x: int, poses=WALK_POSES, sequence=WALK_SEQUENCE,
-               hair=None, sink_rows: int | None = None, pad=(3, 2)) -> list[Sprite]:
-    """upper = the body with the legs erased. Legs are painted fresh per frame."""
+               hair=None, sink_rows: int | None = None, pad=(3, 2), far_limb: Limb | None = None) -> list[Sprite]:
+    """upper = the body with the legs erased. Legs are painted fresh per frame: far leg first (far_limb, default
+    PROFILE_LEG_FAR when limb is PROFILE_LEG), near leg over it."""
+    far_limb = far_limb or (PROFILE_LEG_FAR if limb is PROFILE_LEG else limb)
     frames = []
     for near, far, bob, lag in sequence:
         f = upper.copy()
-        limb.draw(f, far_x, poses[far])
+        far_limb.draw(f, far_x, poses[far])
         limb.draw(f, near_x, poses[near])
         if bob and sink_rows:
             f = f.squash(sink_rows, 1)

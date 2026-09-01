@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 from PIL import Image
 import numpy as np
 from spriteforge import (Sprite, extract, paint_out, clean, idle_loop, eyes_mask, lower_eyes, light_mask,
-                         PROFILE_LEG, WALK_POSES, walk_cycle, export, showcase)
+                         PROFILE_LEG, PROFILE_LEG_FAR, WALK_POSES, walk_cycle, export, showcase)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out"); os.makedirs(OUT, exist_ok=True)
@@ -47,8 +47,9 @@ for y, (x0, s) in {25: (11, 'ODD'), 26: (11, 'OSDO'), 27: (11, 'OSDO'), 28: (11,
 for y, (x0, s) in {26: (22, 'DDO'), 27: (22, 'ODAO'), 28: (22, 'ODAO'), 29: (22, 'ODAO'), 30: (22, 'ODAO'), 31: (22, 'ODDO'),
                    32: (22, 'BBBB'), 33: (22, 'OGGO'), 34: (22, 'OGHO'), 35: (22, 'OKHO'), 36: (22, '.OO.')}.items():
     st.paint(y, x0, s)
-# legs: three-quarter view like her torso. far leg behind at hip 14, near leg over it at hip 17
-PROFILE_LEG.draw(st, 14, WALK_POSES['STAND']); PROFILE_LEG.draw(st, 17, WALK_POSES['STAND'])
+# legs: three-quarter view like her torso. She faces right, so her LEFT leg is nearest the camera: it goes on
+# screen-left (hip 14), drawn last and full size. The right leg is behind on screen-right (hip 17), narrower.
+PROFILE_LEG_FAR.draw(st, 17, WALK_POSES['STAND']); PROFILE_LEG.draw(st, 14, WALK_POSES['STAND'])
 st.save(f"{OUT}/girl_stand_1x.png"); st.save(f"{OUT}/girl_stand_8x.png", scale=8)
 
 # ---------- 3. idle loops (whole body; hair + hem lag; blink). masks by colour + region, never by cutting parts
@@ -76,7 +77,7 @@ for y, (x0, s) in {25: (11, 'ODD'), 26: (11, 'OSDO'), 27: (12, 'OSDO'), 28: (12,
                    31: (14, 'ODDO'), 32: (14, 'BBBB'), 33: (14, 'OGGO'), 34: (14, 'OGHO'), 35: (14, 'OKHO'), 36: (14, '.OO.')}.items():
     upper.paint(y, x0, s)
 upper = lower_eyes(upper, eyes_mask(upper, 18, 27, 12, 15))
-walk_frames = walk_cycle(upper, PROFILE_LEG, far_x=14, near_x=17, hair=light_mask(upper) & upper.box(0, 12, 16, 26), sink_rows=37)
+walk_frames = walk_cycle(upper, PROFILE_LEG, far_x=17, near_x=14, hair=light_mask(upper) & upper.box(0, 12, 16, 26), sink_rows=37)
 export.gif(walk_frames, f"{OUT}/girl_walk.gif", ms=111); export.spritesheet(walk_frames, f"{OUT}/girl_walk_sheet.png")
 
 # ---------- 5. back into her own screen: paint her out, then idle → walk → idle along the floor, no skating

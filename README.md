@@ -41,13 +41,13 @@ python -m spriteforge.cli scale sprite_1x.png sprite_8x.png --k 8
 Then re-pose and animate in Python — see [`examples/girl/make_poses.py`](examples/girl/make_poses.py) for the full worked example (extract → standing pose → idle loops → shy walk → clip inside her own game screen):
 
 ```python
-from spriteforge import Sprite, PROFILE_LEG, WALK_POSES, idle_loop, walk_cycle, export
+from spriteforge import Sprite, PROFILE_LEG, PROFILE_LEG_FAR, WALK_POSES, idle_loop, walk_cycle, export
 
 sp = Sprite.load("sprite_1x.png")
 print(sp.dump())                                  # plan the edit on the map
 sp.erase_rows(37, 49)                             # take the old legs off
-PROFILE_LEG.draw(sp, 14, WALK_POSES["STAND"])     # far leg
-PROFILE_LEG.draw(sp, 17, WALK_POSES["STAND"])     # near leg
+PROFILE_LEG_FAR.draw(sp, 17, WALK_POSES["STAND"]) # far leg (her right, behind, narrower)
+PROFILE_LEG.draw(sp, 14, WALK_POSES["STAND"])     # near leg (her left, in front)
 frames = idle_loop(sp, n=16, mode="stand", feet_row=44)
 export.gif(frames, "idle.gif")
 ```
@@ -58,7 +58,7 @@ Copy or symlink this folder to `~/.claude/skills/sprite-forge` (or your project'
 
 ## The rules, in one breath
 
-1. **View angle first.** Match the body: a 3/4 torso needs overlapping profile legs.
+1. **View angle first.** Match the body: a 3/4 torso needs overlapping profile legs, and the camera-side leg is the near one (facing right → her left leg, screen-left, in front).
 2. **Measure the silhouette** before redrawing a part. No tubes.
 3. **Same palette, same shading density.** Never simplify.
 4. **Never slide parts past each other.** Move the whole body; secondary motion only where it physically happens.

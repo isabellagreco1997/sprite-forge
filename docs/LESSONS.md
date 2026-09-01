@@ -15,3 +15,4 @@ Each entry is a critique from the artist, what was actually wrong, and the rule 
 | 9 | (self-caught) she hovered above the platform and a sole speck survived the paint-out | floor measured from the wrong edge; dilation too small | measure floor/platform tops from the source image; inspect the painted-out scene |
 | 10 | (self-caught) red stripes past the hem after removing arms | repainted the skirt under the arms by guess | restore what was underneath from the source pixels |
 | 11 | (self-caught) render chain hung | `ffmpeg` without `-y` waits on an overwrite prompt | always `-y` |
+| 12 | *"her right leg is bigger than her left; if she looks right, the left leg should be in front and bigger, the right smaller, hidden by the leg in front"* | near/far legs were swapped: the far leg was drawn on the camera side | the camera-side leg is near: screen-left when facing right, drawn last, full width; far leg narrower and behind |

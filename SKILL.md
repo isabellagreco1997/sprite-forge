@@ -10,6 +10,7 @@ Tools live in `spriteforge/` (Python: Pillow, numpy, scipy; ffmpeg for mp4). Rea
 ## 0. Order of checks (do them in THIS order)
 
 1. **View angle** — is the body front-on, 3/4, or profile? Every part you draw must match. A 3/4 torso gets overlapping profile legs (far leg behind, near leg in front), never two front-view legs side by side.
+   **Depth:** the leg on the camera side is the near one. Facing screen-right she shows her left side, so her *left* leg is near: it sits on screen-left, is drawn last and full size, and its boot overlaps the far leg. The far leg is one column narrower, without highlight, partly hidden. Get this backwards and the character looks like she's standing on the wrong leg.
 2. **Silhouette** — measure the original's contour row by row (widths and offsets) before redrawing a part. A leg is thigh → knee (narrower) → calf → ankle (2px), not a straight tube.
 3. **Shading** — match the original's density: same palette, same number of tones, knee/heel/fold marks. Never simplify.
 4. **Timing** — slip factor, holds, bounce. Numbers first, eyes second.
