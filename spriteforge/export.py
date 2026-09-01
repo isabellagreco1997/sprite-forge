@@ -59,3 +59,25 @@ def contact_sheet(paths: list[str], out: str, cols: int = 4, width: int = 480):
         sheet.paste(im.convert("RGB").resize((w, h)), ((i % cols) * w, (i // cols) * h))
     sheet.save(out)
     return sheet
+
+
+def text_image(text: str, path: str, size: int = 13, fg=(230, 230, 230), bg=(20, 20, 28)) -> Image.Image:
+    """Render monospace text (e.g. a Sprite.dump()) to a PNG, for docs and reviews."""
+    from PIL import ImageDraw, ImageFont
+    font = None
+    for cand in ("/System/Library/Fonts/Menlo.ttc", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", "C:/Windows/Fonts/consola.ttf"):
+        try:
+            font = ImageFont.truetype(cand, size); break
+        except OSError:
+            continue
+    font = font or ImageFont.load_default()
+    lines = text.splitlines()
+    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    cw = max(probe.textlength(l, font=font) for l in lines)
+    lh = size + 3
+    im = Image.new("RGB", (int(cw) + 24, lh * len(lines) + 24), bg)
+    d = ImageDraw.Draw(im)
+    for i, l in enumerate(lines):
+        d.text((12, 12 + i * lh), l, font=font, fill=fg)
+    im.save(path)
+    return im

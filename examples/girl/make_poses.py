@@ -23,6 +23,7 @@ sprite_img.save(f"{OUT}/girl_1x.png")
 print("grid", grid, "sprite", sprite_img.size)
 jump = Sprite.load(f"{OUT}/girl_1x.png"); jump.save(f"{OUT}/girl_jump_8x.png", scale=8)
 open(f"{OUT}/girl_dump.txt", "w").write(jump.dump())   # read this before editing anything
+export.text_image(jump.dump(with_palette=False), f"{OUT}/girl_dump.png")
 
 # ---------- 1b. parts map: which pixels are horn / arms / legs / head / torso. Planned on the dump, used to
 # check the split before erasing anything (this is the colour-coded picture in the README).
@@ -102,6 +103,7 @@ bg = paint_out(SHOT, cut, origin, bg=(23, 10, 30)).resize((1920, 1080), Image.LA
 frames_dir = f"{OUT}/frames"
 n = showcase.render_walk(bg, stand_frames, walk_frames, feet_row=50 + 2, floor_y=int(556 * 1.5), x0=560, x1=1180,
                          scale=8, walk_fps=9, stride_px=3, out_dir=frames_dir)
+Image.open(f"{frames_dir}/f00150.jpg").crop((330, 130, 1590, 1000)).save(f"{OUT}/girl_in_game.png")   # a still for the README
 try:
     showcase.to_mp4(frames_dir, f"{OUT}/girl_walking.mp4"); print("mp4 written")
 except Exception as e:
