@@ -21,7 +21,7 @@ origin = cut.info["origin"]
 sprite_img, grid = clean(cut, colors=24)
 sprite_img.save(f"{OUT}/girl_1x.png")
 print("grid", grid, "sprite", sprite_img.size)
-jump = Sprite.load(f"{OUT}/girl_1x.png")
+jump = Sprite.load(f"{OUT}/girl_1x.png"); jump.save(f"{OUT}/girl_jump_8x.png", scale=8)
 open(f"{OUT}/girl_dump.txt", "w").write(jump.dump())   # read this before editing anything
 
 # ---------- 2. new pose: standing. keep head/hair/horn/dress; erase arms + legs by exact ranges from the dump

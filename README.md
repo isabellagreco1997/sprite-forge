@@ -2,13 +2,15 @@
 
 Turn any pixel-art image — real or AI-generated — into clean game sprites, new poses and animations that keep the character consistent. Built while re-posing and animating a character cut out of a single screenshot, and every mistake made along the way is now a rule in [`SKILL.md`](SKILL.md).
 
-<p align="center">
-  <img src="examples/girl/screenshot.png" width="420">
-  <img src="examples/girl/out/girl_stand_8x.png" height="300">
-  <img src="examples/girl/out/girl_walk_clear.gif" height="300">
-  <img src="examples/girl/out/girl_walk.gif" height="300">
-</p>
-<p align="center"><sub>screenshot → clean standing sprite → shy walk (true colours on transparent, and on the dark preview background)</sub></p>
+<table align="center">
+  <tr>
+    <td align="center" width="34%"><img src="examples/girl/screenshot.png" width="100%"><br><b>1 · Source</b><br><sub>an AI-generated "pixel art" screenshot — noisy, no real pixel grid</sub></td>
+    <td align="center" width="16%"><img src="examples/girl/out/girl_jump_8x.png" height="220"><br><b>2 · Extracted</b><br><sub>cut out and snapped to her native grid: a clean 41×50 sprite, 24 colours</sub></td>
+    <td align="center" width="16%"><img src="examples/girl/out/girl_stand_8x.png" height="220"><br><b>3 · New pose</b><br><sub>standing idle, drawn in her own palette; head, hair and dress untouched</sub></td>
+    <td align="center" width="16%"><img src="examples/girl/out/girl_stand_idle_clear.gif" height="220"><br><b>4 · Idle loop</b><br><sub>whole-body breathing, hair lag, hem, blink — no seams</sub></td>
+    <td align="center" width="16%"><img src="examples/girl/out/girl_walk_clear.gif" height="220"><br><b>5 · Walk cycle</b><br><sub>shy shuffle: legs drawn per frame, hands clasped, eyes down</sub></td>
+  </tr>
+</table>
 
 What it does:
 
@@ -73,7 +75,7 @@ Full version with the why: [`SKILL.md`](SKILL.md) · history of every mistake: [
 
 ## Examples
 
-* `examples/girl/` — from screenshot to standing pose, float and standing idle loops, a shy walk, and the clip back inside her game.
+* `examples/girl/` — the sequence above, end to end, from one script: screenshot → extracted sprite → standing pose → float and standing idle loops → shy walk → a clip of her walking inside her own game screen (`out/girl_walking.mp4` after you run it).
 * `examples/knight/` — a knight drawn procedurally (parts as rectangles with per-frame offsets, auto-outline), 6-frame idle + walk, dungeon showcase. Useful when you need a sprite from nothing.
 
 ## License
