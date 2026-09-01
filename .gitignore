@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+examples/*/out/frames/
+examples/knight/out/
+examples/knight/show/
+*.mp4
+.DS_Store
