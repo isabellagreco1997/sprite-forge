@@ -16,3 +16,5 @@ Each entry is a critique from the artist, what was actually wrong, and the rule 
 | 10 | (self-caught) red stripes past the hem after removing arms | repainted the skirt under the arms by guess | restore what was underneath from the source pixels |
 | 11 | (self-caught) render chain hung | `ffmpeg` without `-y` waits on an overwrite prompt | always `-y` |
 | 12 | *"her right leg is bigger than her left; if she looks right, the left leg should be in front and bigger, the right smaller, hidden by the leg in front"* | near/far legs were swapped: the far leg was drawn on the camera side | the camera-side leg is near: screen-left when facing right, drawn last, full width; far leg narrower and behind |
+
+| 13 | *"her hair is not moving with her walk a bit up and down"* | hair shifted +1 relative to the body exactly when the body rose, so its absolute position never changed | secondary motion = body motion delayed one frame, in absolute terms: relative shifts [-1, 0, +1] across contact / recoil / pass |

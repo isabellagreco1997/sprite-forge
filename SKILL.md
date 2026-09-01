@@ -60,6 +60,7 @@ Palette-indexed ASCII map, one char per pixel, columns numbered. **Every edit is
 
 * Cut-and-flip legs are not animation: boots point backwards on alternate strides, thighs detach from hips, skirt pixels ride along. Draw the legs **fresh per frame** with `Limb.draw` and per-row offsets.
 * 6 frames per cycle: **contact** (body low, front foot flat, back heel peeling) → **recoil** (still low) → **pass** (body high, swing foot bent and lifted under the body), then mirror for the other leg. Never leave the pass frames identical to standing — that's a hold that reads as a stutter.
+* **Hair/cloth lag is measured in absolute position.** Body height per frame [1,1,0,…] → hair one frame late [0,1,1,…] → relative shift [-1,0,+1]. Shifting the hair only on the pass frame cancels the body's motion exactly and the hair looks glued on. Check the hair's absolute row across the frames, not its offset from the body.
 * Personality lives in the walk: stride length (2–3 px = shy shuffle, 5–6 = march), what the hands do (clasped in front / swinging / in pockets), eye line (`lower_eyes` for shy), hair lag, bounce height.
 * **Slip factor** before anything else: `ground_speed = steps_per_cycle × stride / cycle_seconds`. If the showcase moves the character faster than that, they skate. `motion.slip_factor` must be 1.0.
 

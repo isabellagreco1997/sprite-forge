@@ -145,6 +145,10 @@ class Sprite:
             for y, x in zip(ys, xs):
                 if out.a[y, x, 3] == 0 and y > 0 and out.a[y - 1, x, 3] > 0:
                     out.a[y, x] = out.a[y - 1, x]
+        if fill and dy < 0:                      # moving up: stretch from the row below so strands keep their length
+            for y, x in zip(ys, xs):
+                if out.a[y, x, 3] == 0 and y + 1 < H and out.a[y + 1, x, 3] > 0:
+                    out.a[y, x] = out.a[y + 1, x]
         return out
 
     def squash(self, rows_end: int, down: int = 1) -> "Sprite":

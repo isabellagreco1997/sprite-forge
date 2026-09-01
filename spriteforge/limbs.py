@@ -95,9 +95,12 @@ WALK_POSES = {
     'PLANT': Pose([0] * 9 + [1] * 4),
 }
 
-# (near pose, far pose, body sinks?, hair lags?)  — 6 frames, 3px stride
-WALK_SEQUENCE = [('FWD', 'BACK', True, False), ('FWD2', 'BACK2', True, False), ('PLANT', 'PASS', False, True),
-                 ('BACK', 'FWD', True, False), ('BACK2', 'FWD2', True, False), ('PASS', 'PLANT', False, True)]
+# (near pose, far pose, body sinks?, hair dy relative to the body)  — 6 frames, 3px stride
+# Hair must follow the body ONE FRAME LATE in absolute terms. Body height per frame is [1,1,0,1,1,0] (sunk on
+# contact + recoil, up on the pass); hair delayed one frame is [0,1,1,0,1,1]; relative to the body that is
+# [-1, 0, +1]. If you only shift the hair on the pass frame, its absolute position never changes and it looks glued.
+WALK_SEQUENCE = [('FWD', 'BACK', True, -1), ('FWD2', 'BACK2', True, 0), ('PLANT', 'PASS', False, 1),
+                 ('BACK', 'FWD', True, -1), ('BACK2', 'FWD2', True, 0), ('PASS', 'PLANT', False, 1)]
 WALK_STRIDE = 3
 
 
@@ -111,9 +114,9 @@ def walk_cycle(upper: Sprite, limb: Limb, far_x: int, near_x: int, poses=WALK_PO
         f = upper.copy()
         far_limb.draw(f, far_x, poses[far])
         limb.draw(f, near_x, poses[near])
-        if bob and sink_rows:
+        if lag and hair is not None:            # hair shift FIRST (mask was built on the unsquashed body)...
+            f = f.shift_region(hair, dy=int(lag))
+        if bob and sink_rows:                   # ...then the body sinks and carries the hair with it
             f = f.squash(sink_rows, 1)
-        if lag and hair is not None:
-            f = f.shift_region(hair, dy=1)
         frames.append(f.offset(0, 0, pad=pad))
     return frames
