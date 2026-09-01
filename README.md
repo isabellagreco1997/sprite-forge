@@ -4,11 +4,12 @@ Turn any pixel-art image — real or AI-generated — into clean game sprites, n
 
 <table align="center">
   <tr>
-    <td align="center" width="34%"><img src="examples/girl/screenshot.png" width="100%"><br><b>1 · Source</b><br><sub>an AI-generated "pixel art" screenshot — noisy, no real pixel grid</sub></td>
-    <td align="center" width="16%"><img src="examples/girl/out/girl_jump_8x.png" height="220"><br><b>2 · Extracted</b><br><sub>cut out and snapped to her native grid: a clean 41×50 sprite, 24 colours</sub></td>
-    <td align="center" width="16%"><img src="examples/girl/out/girl_stand_8x.png" height="220"><br><b>3 · New pose</b><br><sub>standing idle, drawn in her own palette; head, hair and dress untouched</sub></td>
-    <td align="center" width="16%"><img src="examples/girl/out/girl_stand_idle_clear.gif" height="220"><br><b>4 · Idle loop</b><br><sub>whole-body breathing, hair lag, hem, blink — no seams</sub></td>
-    <td align="center" width="16%"><img src="examples/girl/out/girl_walk_clear.gif" height="220"><br><b>5 · Walk cycle</b><br><sub>shy shuffle: legs drawn per frame, hands clasped, eyes down</sub></td>
+    <td align="center" width="30%"><img src="examples/girl/screenshot.png" width="100%"><br><b>1 · Source</b><br><sub>an AI-generated "pixel art" screenshot — noisy, no real pixel grid</sub></td>
+    <td align="center" width="14%"><img src="examples/girl/out/girl_jump_8x.png" height="220"><br><b>2 · Extracted</b><br><sub>cut out and snapped to her native grid: a clean 41×50 sprite, 24 colours</sub></td>
+    <td align="center" width="14%"><img src="examples/girl/out/girl_parts_8x.png" height="220"><br><b>3 · Parts map</b><br><sub>which pixels are horn, arms, legs, head, torso — planned on the ASCII dump, so the re-pose erases exactly the right ones</sub></td>
+    <td align="center" width="14%"><img src="examples/girl/out/girl_stand_8x.png" height="220"><br><b>4 · New pose</b><br><sub>standing idle, drawn in her own palette; head, hair and dress untouched</sub></td>
+    <td align="center" width="14%"><img src="examples/girl/out/girl_stand_idle_clear.gif" height="220"><br><b>5 · Idle loop</b><br><sub>whole-body breathing, hair lag, hem, blink — no seams</sub></td>
+    <td align="center" width="14%"><img src="examples/girl/out/girl_walk_clear.gif" height="220"><br><b>6 · Walk cycle</b><br><sub>shy shuffle: legs drawn per frame, hands clasped, eyes down</sub></td>
   </tr>
 </table>
 
@@ -19,6 +20,7 @@ What it does:
 | **extract** | `spriteforge extract` | cuts the character out of a screenshot: background colour distance, largest component + attached bits, holes filled, nearby stars/coins dropped |
 | **snap** | `spriteforge snap` | finds the *native* pixel grid of fake pixel art (AI output has none), takes the median per cell, quantises the palette → a real 1x sprite, sharper than the source |
 | **dump** | `spriteforge dump` | prints the sprite as a palette-indexed ASCII map so edits are planned pixel-exact, never guessed |
+| **parts** | `parts.segment / preview` | polygon parts map (horn, arms, legs…) with priority and colour filters; the colour-coded preview shows the split before you erase |
 | **re-pose** | `Sprite.erase / paint / restore_from` + `Limb` / `Pose` | remove limbs by exact ranges, restore what was underneath from the source, draw new limbs in the same palette, shading and view angle |
 | **idle** | `idle_loop` | whole-body breathing with secondary motion (hair lag, hem flare, blink). No part-seams |
 | **walk** | `walk_cycle` | legs drawn fresh per frame (contact → recoil → pass), personality via stride, hands, eye line |

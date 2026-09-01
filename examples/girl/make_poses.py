@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 from PIL import Image
 import numpy as np
 from spriteforge import (Sprite, extract, paint_out, clean, idle_loop, eyes_mask, lower_eyes, light_mask,
-                         PROFILE_LEG, PROFILE_LEG_FAR, WALK_POSES, walk_cycle, export, showcase)
+                         PROFILE_LEG, PROFILE_LEG_FAR, WALK_POSES, walk_cycle, export, showcase, parts)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out"); os.makedirs(OUT, exist_ok=True)
@@ -23,6 +23,21 @@ sprite_img.save(f"{OUT}/girl_1x.png")
 print("grid", grid, "sprite", sprite_img.size)
 jump = Sprite.load(f"{OUT}/girl_1x.png"); jump.save(f"{OUT}/girl_jump_8x.png", scale=8)
 open(f"{OUT}/girl_dump.txt", "w").write(jump.dump())   # read this before editing anything
+
+# ---------- 1b. parts map: which pixels are horn / arms / legs / head / torso. Planned on the dump, used to
+# check the split before erasing anything (this is the colour-coded picture in the README).
+PARTS = {'horn': [(18, 0), (23, 0), (23, 9), (18, 9)],
+         'armR': [(29, 17), (39, 17), (39, 28), (31, 28), (29, 24)],            # raised arm (screen right)
+         'armL': [(0, 22), (14, 22), (14, 27), (12, 30), (0, 30)],              # back arm (screen left)
+         'legR': [(23, 36), (41, 34), (41, 46), (31, 46), (23, 42)],            # front leg (kick forward)
+         'legL': [(4, 38), (22, 38), (22, 42), (14, 50), (4, 50)],              # back leg (trailing)
+         'head': [(6, 4), (32, 4), (32, 23), (28, 23), (27, 27), (20, 27), (18, 23), (6, 23)]}
+def no_dress_in_legs(name, r, g, b):                                            # skirt red / frill white never belong to a leg
+    if not name.startswith('leg'):
+        return np.ones_like(r, bool)
+    return ~(((r > 140) & (g < 90) & (b < 90)) | ((r > 200) & (g > 200) & (b > 200)))
+part_masks = parts.segment(jump, PARTS, colour_filter=no_dress_in_legs)
+parts.preview(jump, part_masks, scale=8).save(f"{OUT}/girl_parts_8x.png")
 
 # ---------- 2. new pose: standing. keep head/hair/horn/dress; erase arms + legs by exact ranges from the dump
 # colours we paint with are registered by RGB (dump symbols are per-sprite and change if the grid phase moves)

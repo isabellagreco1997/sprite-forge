@@ -41,6 +41,8 @@ Palette-indexed ASCII map, one char per pixel, columns numbered. **Every edit is
 
 ## 4. New pose (re-posing an existing sprite)
 
+* Build a **parts map** first (`parts.segment` with polygons planned on the dump; colour filters keep skirt-red out of leg polygons). Look at `parts.preview` before erasing anything — it shows whether a strand, a frill or a glove landed in the wrong part.
+
 * Keep everything that doesn't move **pixel-for-pixel** (head, hair, torso, costume). That's what keeps the character consistent.
 * Erase limbs by exact ranges from the dump. Then **restore what was underneath from the source sprite** (`restore_from`) — never repaint the skirt/torso under a removed arm by guess.
 * Draw the new limb with the limb DSL (`Limb`, `Pose`) or `paint()` rows, in the original palette, at the original shading density, matching the view angle (rule 0).
