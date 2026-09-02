@@ -9,11 +9,6 @@ Turn any pixel-art image — real or AI-generated — into clean game sprites, n
     <td align="center" width="50%" valign="top"><img src="examples/girl/out/girl_stand_idle_clear.gif" height="380"><br><b>7 · Idle loop</b><br><sub>whole-body breathing, hair one beat behind, hem flare, a blink. No part seams.</sub></td>
     <td align="center" width="50%" valign="top"><img src="examples/girl/out/girl_walk_clear.gif" height="380"><br><b>8 · Walk cycle</b><br><sub>shy shuffle: legs drawn fresh per frame, hands clasped, eyes down, hair following a frame late.</sub></td>
   </tr>
-</table><b>6 · Idle loop &amp; walk cycle</b><br><sub>idle: whole-body breathing, hair lag, hem, blink, no seams · walk: shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind</sub></td>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_walk_sheet.png" width="100%"><br><b>7 · Spritesheet</b><br><sub>the six walk frames, contact → recoil → pass for both legs: what goes into the game</sub></td>
-  </tr>
-</table><b>7 · Walk cycle</b><br><sub>shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind; the six-frame spritesheet is what goes into the game: contact → recoil → pass, both legs</sub></td>
-  </tr>
 </table>
 
 What it does:
