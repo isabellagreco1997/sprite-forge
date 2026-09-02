@@ -11,8 +11,10 @@ Turn any pixel-art image — real or AI-generated — into clean game sprites, n
   </tr>
   <tr>
     <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_stand_8x.png" width="100%"><br><b>5 · New pose</b><br><sub>standing idle drawn in her own palette; head, hair and dress untouched; legs in her three-quarter view</sub></td>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_stand_idle_clear.gif" width="100%"><br><b>6 · Idle loop</b><br><sub>whole-body breathing, hair lag, hem, blink. No seams</sub></td>
-    <td align="center" width="50%" valign="top" colspan="2"><table width="100%"><tr><td align="center" width="40%"><img src="examples/girl/out/girl_walk_clear.gif" width="100%"></td><td align="center" width="60%"><img src="examples/girl/out/girl_walk_sheet.png" width="100%"></td></tr></table><b>7 · Walk cycle</b><br><sub>shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind; the six-frame spritesheet is what goes into the game: contact → recoil → pass, both legs</sub></td>
+    <td align="center" width="50%" valign="top" colspan="2"><table width="100%"><tr><td align="center" width="50%"><img src="examples/girl/out/girl_stand_idle_clear.gif" width="60%"></td><td align="center" width="50%"><img src="examples/girl/out/girl_walk_clear.gif" width="60%"></td></tr></table><b>6 · Idle loop &amp; walk cycle</b><br><sub>idle: whole-body breathing, hair lag, hem, blink, no seams · walk: shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_walk_sheet.png" width="100%"><br><b>7 · Spritesheet</b><br><sub>the six walk frames, contact → recoil → pass for both legs: what goes into the game</sub></td>
+  </tr>
+</table><b>7 · Walk cycle</b><br><sub>shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind; the six-frame spritesheet is what goes into the game: contact → recoil → pass, both legs</sub></td>
   </tr>
 </table>
 
