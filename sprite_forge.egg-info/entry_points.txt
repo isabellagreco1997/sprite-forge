@@ -1,0 +1,2 @@
+[console_scripts]
+spriteforge = spriteforge.cli:main

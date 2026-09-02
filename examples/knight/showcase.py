@@ -11,8 +11,17 @@ idle = [Image.open(f'out/frames/idle_{i}.png').convert('RGBA') for i in range(6)
 walk = [Image.open(f'out/frames/walk_{i}.png').convert('RGBA') for i in range(6)]
 up = lambda im: im.resize((im.width * SC, im.height * SC), Image.NEAREST)
 idle = [up(i) for i in idle]; walk = [up(i) for i in walk]
-font = ImageFont.truetype(os.path.expanduser('~/Library/Fonts/PressStart2P-Regular.ttf'), 64)
-font_s = ImageFont.truetype(os.path.expanduser('~/Library/Fonts/PressStart2P-Regular.ttf'), 22)
+def _font(size):
+    """Press Start 2P if installed (any OS font dir), else a monospace system font, else PIL's default."""
+    for cand in (os.path.expanduser('~/Library/Fonts/PressStart2P-Regular.ttf'), 'PressStart2P-Regular.ttf',
+                 '/System/Library/Fonts/Menlo.ttc', '/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf', 'C:/Windows/Fonts/consolab.ttf'):
+        try:
+            return ImageFont.truetype(cand, size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+font = _font(64)
+font_s = _font(22)
 random.seed(7)
 
 # static background: dark stone gradient + vignette, built once

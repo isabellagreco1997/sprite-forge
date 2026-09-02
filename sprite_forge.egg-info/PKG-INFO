@@ -1,3 +1,19 @@
+Metadata-Version: 2.4
+Name: sprite-forge
+Version: 0.1.0
+Summary: Turn any pixel-art image into clean game sprites, new poses and animations.
+Author: Isabella Greco
+License: MIT
+Project-URL: Homepage, https://github.com/isabellagreco1997/sprite-forge
+Keywords: pixel-art,sprites,game-dev,animation
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pillow>=10
+Requires-Dist: numpy>=1.24
+Requires-Dist: scipy>=1.10
+Dynamic: license-file
+
 # sprite-forge
 
 Turn any pixel-art image — real or AI-generated — into clean game sprites, new poses and animations that keep the character consistent. Built while re-posing and animating a character cut out of a single screenshot, and every mistake made along the way is now a rule in [`SKILL.md`](SKILL.md).
