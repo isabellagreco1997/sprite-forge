@@ -4,19 +4,15 @@ Turn any pixel-art image — real or AI-generated — into clean game sprites, n
 
 <table align="center">
   <tr>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/screenshot.png" width="100%"><br><b>1 · Source</b><br><sub>an AI-generated “pixel art” screenshot: noisy, no real pixel grid</sub></td>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_jump_8x.png" width="100%"><br><b>2 · Extracted</b><br><sub>cut out and snapped to her native grid: a clean 41×50 sprite, 24 colours</sub></td>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_dump.png" width="100%"><br><b>3 · Dump</b><br><sub>the sprite as a palette-indexed ASCII map: every edit is planned here, row and column exact</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/screenshot.png" width="100%"><br><b>1 · Source</b><br><sub>an AI-generated “pixel art” screenshot: noisy, no real pixel grid</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_jump_8x.png" width="100%"><br><b>2 · Extracted</b><br><sub>cut out and snapped to her native grid: a clean 41×50 sprite, 24 colours</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_dump.png" width="100%"><br><b>3 · Dump</b><br><sub>the sprite as a palette-indexed ASCII map: every edit is planned here, row and column exact</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_parts_8x.png" width="100%"><br><b>4 · Parts map</b><br><sub>which pixels are horn, arms, legs, head, torso, so the re-pose erases exactly the right ones</sub></td>
   </tr>
   <tr>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_parts_8x.png" width="100%"><br><b>4 · Parts map</b><br><sub>which pixels are horn, arms, legs, head, torso, so the re-pose erases exactly the right ones</sub></td>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_stand_8x.png" width="100%"><br><b>5 · New pose</b><br><sub>standing idle drawn in her own palette; head, hair and dress untouched; legs in her three-quarter view</sub></td>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_stand_idle_clear.gif" width="100%"><br><b>6 · Idle loop</b><br><sub>whole-body breathing, hair lag, hem, blink. No seams</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_walk_clear.gif" width="100%"><br><b>7 · Walk cycle</b><br><sub>shy shuffle: legs drawn per frame, hands clasped, eyes down, hair a frame behind</sub></td>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_walk_sheet.png" width="100%"><br><b>8 · Spritesheet</b><br><sub>contact → recoil → pass, both legs: what goes into the game</sub></td>
-    <td align="center" width="33%" valign="top"><img src="examples/girl/out/girl_in_game.png" width="100%"><br><b>9 · Back in her game</b><br><sub>painted out of the screenshot, composited back at a slip-free ground speed</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_stand_8x.png" width="100%"><br><b>5 · New pose</b><br><sub>standing idle drawn in her own palette; head, hair and dress untouched; legs in her three-quarter view</sub></td>
+    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_stand_idle_clear.gif" width="100%"><br><b>6 · Idle loop</b><br><sub>whole-body breathing, hair lag, hem, blink. No seams</sub></td>
+    <td align="center" width="50%" valign="top" colspan="2"><table width="100%"><tr><td align="center" width="40%"><img src="examples/girl/out/girl_walk_clear.gif" width="100%"></td><td align="center" width="60%"><img src="examples/girl/out/girl_walk_sheet.png" width="100%"></td></tr></table><b>7 · Walk cycle</b><br><sub>shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind; the six-frame spritesheet is what goes into the game: contact → recoil → pass, both legs</sub></td>
   </tr>
 </table>
 
