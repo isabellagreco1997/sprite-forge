@@ -2,16 +2,14 @@
 
 Turn any pixel-art image — real or AI-generated — into clean game sprites, new poses and animations that keep the character consistent. Built while re-posing and animating a character cut out of a single screenshot, and every mistake made along the way is now a rule in [`SKILL.md`](SKILL.md).
 
+<p align="center"><img src="examples/girl/out/pipeline.png" width="100%" alt="pipeline: source screenshot → extracted sprite → parts map → new pose → dump → walk spritesheet"></p>
+
 <table align="center">
   <tr>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/screenshot.png" width="100%"><br><b>1 · Source</b><br><sub>an AI-generated “pixel art” screenshot: noisy, no real pixel grid</sub></td>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_jump_8x.png" width="100%"><br><b>2 · Extracted</b><br><sub>cut out and snapped to her native grid: a clean 41×50 sprite, 24 colours</sub></td>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_dump.png" width="100%"><br><b>3 · Dump</b><br><sub>the sprite as a palette-indexed ASCII map: every edit is planned here, row and column exact</sub></td>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_parts_8x.png" width="100%"><br><b>4 · Parts map</b><br><sub>which pixels are horn, arms, legs, head, torso, so the re-pose erases exactly the right ones</sub></td>
+    <td align="center" width="50%" valign="top"><img src="examples/girl/out/girl_stand_idle_clear.gif" height="380"><br><b>7 · Idle loop</b><br><sub>whole-body breathing, hair one beat behind, hem flare, a blink. No part seams.</sub></td>
+    <td align="center" width="50%" valign="top"><img src="examples/girl/out/girl_walk_clear.gif" height="380"><br><b>8 · Walk cycle</b><br><sub>shy shuffle: legs drawn fresh per frame, hands clasped, eyes down, hair following a frame late.</sub></td>
   </tr>
-  <tr>
-    <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_stand_8x.png" width="100%"><br><b>5 · New pose</b><br><sub>standing idle drawn in her own palette; head, hair and dress untouched; legs in her three-quarter view</sub></td>
-    <td align="center" width="50%" valign="top" colspan="2"><table width="100%"><tr><td align="center" width="50%"><img src="examples/girl/out/girl_stand_idle_clear.gif" width="60%"></td><td align="center" width="50%"><img src="examples/girl/out/girl_walk_clear.gif" width="60%"></td></tr></table><b>6 · Idle loop &amp; walk cycle</b><br><sub>idle: whole-body breathing, hair lag, hem, blink, no seams · walk: shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind</sub></td>
+</table><b>6 · Idle loop &amp; walk cycle</b><br><sub>idle: whole-body breathing, hair lag, hem, blink, no seams · walk: shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind</sub></td>
     <td align="center" width="25%" valign="top"><img src="examples/girl/out/girl_walk_sheet.png" width="100%"><br><b>7 · Spritesheet</b><br><sub>the six walk frames, contact → recoil → pass for both legs: what goes into the game</sub></td>
   </tr>
 </table><b>7 · Walk cycle</b><br><sub>shy shuffle, legs drawn fresh per frame, hands clasped, eyes down, hair a frame behind; the six-frame spritesheet is what goes into the game: contact → recoil → pass, both legs</sub></td>
@@ -84,7 +82,7 @@ Full version with the why: [`SKILL.md`](SKILL.md) · history of every mistake: [
 
 ## Examples
 
-* `examples/girl/` — the sequence above, end to end, from one script: screenshot → extracted sprite → standing pose → float and standing idle loops → shy walk → a clip of her walking inside her own game screen (`out/girl_walking.mp4` after you run it).
+* `examples/girl/` — the sequence above, end to end, from one script (`make_banner.py` composes the pipeline image): screenshot → extracted sprite → standing pose → float and standing idle loops → shy walk → a clip of her walking inside her own game screen (`out/girl_walking.mp4` after you run it).
 * `examples/knight/` — a knight drawn procedurally (parts as rectangles with per-frame offsets, auto-outline), 6-frame idle + walk, dungeon showcase. Useful when you need a sprite from nothing.
 
 ## License
