@@ -61,8 +61,10 @@ def contact_sheet(paths: list[str], out: str, cols: int = 4, width: int = 480):
     return sheet
 
 
-def text_image(text: str, path: str, size: int = 13, fg=(230, 230, 230), bg=(20, 20, 28)) -> Image.Image:
-    """Render monospace text (e.g. a Sprite.dump()) to a PNG, for docs and reviews."""
+def text_image(text: str, path: str, size: int = 13, fg=(230, 230, 230), bg=(20, 20, 28), columns: int = 1,
+               gap: int = 36) -> Image.Image:
+    """Render monospace text (e.g. a Sprite.dump()) to a PNG, for docs and reviews. columns>1 splits the lines
+    into side-by-side blocks so a tall dump becomes a wide image (each block repeats the header line)."""
     from PIL import ImageDraw, ImageFont
     font = None
     for cand in ("/System/Library/Fonts/Menlo.ttc", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", "C:/Windows/Fonts/consola.ttf"):
@@ -75,9 +77,18 @@ def text_image(text: str, path: str, size: int = 13, fg=(230, 230, 230), bg=(20,
     probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
     cw = max(probe.textlength(l, font=font) for l in lines)
     lh = size + 3
-    im = Image.new("RGB", (int(cw) + 24, lh * len(lines) + 24), bg)
+    if columns > 1:
+        header, body = lines[0], lines[1:]
+        per = -(-len(body) // columns)
+        blocks = [[header] + body[i * per:(i + 1) * per] for i in range(columns)]
+    else:
+        blocks = [lines]
+    rows = max(len(b) for b in blocks)
+    im = Image.new("RGB", (int(cw) * len(blocks) + gap * (len(blocks) - 1) + 24, lh * rows + 24), bg)
     d = ImageDraw.Draw(im)
-    for i, l in enumerate(lines):
-        d.text((12, 12 + i * lh), l, font=font, fill=fg)
+    for bi, block in enumerate(blocks):
+        x = 12 + bi * (int(cw) + gap)
+        for i, l in enumerate(block):
+            d.text((x, 12 + i * lh), l, font=font, fill=fg)
     im.save(path)
     return im

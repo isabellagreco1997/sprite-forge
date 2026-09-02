@@ -23,7 +23,7 @@ sprite_img.save(f"{OUT}/girl_1x.png")
 print("grid", grid, "sprite", sprite_img.size)
 jump = Sprite.load(f"{OUT}/girl_1x.png"); jump.save(f"{OUT}/girl_jump_8x.png", scale=8)
 open(f"{OUT}/girl_dump.txt", "w").write(jump.dump())   # read this before editing anything
-export.text_image(jump.dump(with_palette=False), f"{OUT}/girl_dump.png")
+export.text_image(jump.dump(with_palette=False), f"{OUT}/girl_dump.png", columns=2)
 
 # ---------- 1b. parts map: which pixels are horn / arms / legs / head / torso. Planned on the dump, used to
 # check the split before erasing anything (this is the colour-coded picture in the README).
