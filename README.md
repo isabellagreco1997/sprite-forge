@@ -58,9 +58,19 @@ frames = idle_loop(sp, n=16, mode="stand", feet_row=44)
 export.gif(frames, "idle.gif")
 ```
 
-## Using it as a Claude Code skill
+## Make it work with your agent
 
-Copy or symlink this folder to `~/.claude/skills/sprite-forge` (or your project's `.claude/skills/`). `SKILL.md` carries the playbook: the order of checks, the seam rule, the slip-factor rule, and how to re-pose without losing the character. Claude will follow it when you ask for sprites, poses or animations.
+You don't run the pipeline by hand. The agent does, following `SKILL.md`. Three steps:
+
+1. **Install once** on the machine the agent works on: the Install section above.
+2. **Give the agent the playbook.**
+   * **Claude Code**: copy or symlink this folder to `~/.claude/skills/sprite-forge` (or your project's `.claude/skills/`). It loads itself when you ask for sprites, poses or animations.
+   * **Codex**: add to `AGENTS.md`: `Read /path/to/sprite-forge/SKILL.md before touching any pixel art.`
+   * **Cursor / Windsurf / Gemini CLI / anything with a rules file**: paste `SKILL.md` into it, or one line pointing at the file.
+   * **Any chat agent with a shell**: start with "Read sprite-forge/SKILL.md, then extract the character from this screenshot and make her walk."
+3. **Ask in plain words.** "Take her out of this image and animate her", "make her legs closer together", "her body faces right but her legs face front". Every critique you give should become a line in the skill's lessons table, so the next sprite starts where this one ended. If the agent doesn't offer to add it, ask.
+
+`SKILL.md` carries the order of checks (view angle, silhouette, shading, timing), the seam rule, the slip-factor rule, and how to re-pose without losing the character.
 
 ## The rules, in one breath
 
