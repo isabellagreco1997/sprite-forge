@@ -5,3 +5,4 @@ examples/knight/out/
 examples/knight/show/
 *.mp4
 .DS_Store
+*.egg-info/
