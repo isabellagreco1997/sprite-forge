@@ -7,6 +7,10 @@ description: Turn any pixel-art image (real or AI-generated) into clean game spr
 
 Tools live in `spriteforge/` (Python: Pillow, numpy, scipy; ffmpeg for mp4). Read this whole file before touching pixels. Every rule below was paid for with a wrong render.
 
+## Detailed artwork / requested new animation frames
+
+For larger portraits, title-screen layers, palettes above 62 colors, or requests for newly drawn frame animation, first read [docs/DETAILED_ART.md](docs/DETAILED_ART.md). Correct the static art before animating. Preserve fixed registration, author the moving contours and shading as explicit keyframes, and use code for assembly/playback. Do not present region shifts or whole-image transforms as a substitute for requested new drawings. Use `frame_report` for measurements, then inspect the rendered loop and scene.
+
 ## 0. Order of checks (do them in THIS order)
 
 1. **View angle** — is the body front-on, 3/4, or profile? Every part you draw must match. A 3/4 torso gets overlapping profile legs (far leg behind, near leg in front), never two front-view legs side by side.
@@ -37,7 +41,7 @@ spriteforge snap cut.png sprite_1x.png --colors 24
 ```
 spriteforge dump sprite_1x.png > dump.txt
 ```
-Palette-indexed ASCII map, one char per pixel, columns numbered. **Every edit is planned on this map** — exact rows, exact columns, exact palette symbols. `Sprite.paint(y, x0, "2d342")` uses the same symbols the dump printed.
+Palette-indexed UTF-8 map, one glyph per pixel, columns numbered. Up to 256 colors are represented without dropping entries; see the detailed-art guide for extended symbols. **Every edit is planned on this map** — exact rows, exact columns, exact palette symbols. `Sprite.paint(y, x0, "2d342")` uses the same symbols the dump printed.
 
 ## 4. New pose (re-posing an existing sprite)
 
