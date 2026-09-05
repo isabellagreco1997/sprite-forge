@@ -24,6 +24,12 @@ What it does:
 | **walk** | `walk_cycle` | legs drawn fresh per frame (contact → recoil → pass), personality via stride, hands, eye line |
 | **showcase** | `showcase.render_walk / to_mp4` | back into the original scene at a slip-free ground speed |
 
+## Detailed portraits and authored animation
+
+For title-screen portraits and larger palettes, follow [the detailed-art workflow](docs/DETAILED_ART.md): correct the static art, draw registered key poses, then assemble the timeline. Pixel maps support 256 colors. `frame_report` checks fixed regions, palette changes, alpha, clipping risk and isolated pixels without pretending to judge the artwork.
+
+Run the regression checks with `python -m unittest discover -s tests -v`.
+
 ## Install
 
 ```bash

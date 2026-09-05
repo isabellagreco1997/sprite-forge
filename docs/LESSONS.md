@@ -18,3 +18,8 @@ Each entry is a critique from the artist, what was actually wrong, and the rule 
 | 12 | *"her right leg is bigger than her left; if she looks right, the left leg should be in front and bigger, the right smaller, hidden by the leg in front"* | near/far legs were swapped: the far leg was drawn on the camera side | the camera-side leg is near: screen-left when facing right, drawn last, full width; far leg narrower and behind |
 
 | 13 | *"her hair is not moving with her walk a bit up and down"* | hair shifted +1 relative to the body exactly when the body rose, so its absolute position never changed | secondary motion = body motion delayed one frame, in absolute terms: relative shifts [-1, 0, +1] across contact / recoil / pass |
+
+| 14 | "the portrait and ghost do not look like the same set" | shared file dimensions hid different displayed pixel scales and noisy alpha edges | align the visible logical grid and inspect clean static art before animating |
+| 15 | "design new frames, not just a scripted image effect" | shifts and warps were presented as authored animation | draw registered pixel-map key poses; keep assembly and playback separate from drawing |
+| 16 | detailed sprites produced unknown symbols in the pixel dump | palettes above 62 colors were silently truncated | represent every palette entry, preserve existing symbols, and fail explicitly beyond the supported limit |
+| 17 | generated frames had clipped extremities and shifting anchors | cells were accepted without inspecting their bounds and registration | reject clipped cells; use fixed anchors and a common crop origin |

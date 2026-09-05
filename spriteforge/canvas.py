@@ -11,7 +11,12 @@ from collections import Counter
 from PIL import Image
 import numpy as np
 
-SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# One printable glyph per pixel. Preserve the original 62 assignments, then
+# extend to a full indexed-color palette. Dot/space are paint controls and '?'
+# remains an unknown-color diagnostic, so none can be assigned a color.
+_ASCII_EXTRA = "!#$%&()*+,-/:;<=>@[]^_{|}~"
+_SYMBOL_PREFIX = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" + _ASCII_EXTRA
+SYMBOLS = _SYMBOL_PREFIX + "".join(chr(0x100 + i) for i in range(256 - len(_SYMBOL_PREFIX)))
 
 
 class Sprite:
@@ -48,7 +53,12 @@ class Sprite:
         """Symbols are assigned by frequency: '0' is the most common colour."""
         H, W = self.a.shape[:2]
         cnt = Counter(tuple(int(v) for v in self.a[y, x, :3]) for y in range(H) for x in range(W) if self.a[y, x, 3])
-        self.pal = {SYMBOLS[i]: c for i, (c, _) in enumerate(cnt.most_common()) if i < len(SYMBOLS)}
+        if len(cnt) > len(SYMBOLS):
+            raise ValueError(
+                f"Sprite has {len(cnt)} colors; quantize to {len(SYMBOLS)} or fewer "
+                "before editing its pixel map. Colors will not be silently dropped."
+            )
+        self.pal = {SYMBOLS[i]: c for i, (c, _) in enumerate(cnt.most_common())}
         return self.pal
 
     def symbol_of(self, rgb) -> str:
@@ -59,9 +69,9 @@ class Sprite:
         return "?"
 
     def add_colour(self, symbol: str, rgb: tuple):
-        """Register a named colour. Dump symbols are assigned per sprite by frequency, so scripts that must be
-        re-runnable should paint with colours they register themselves (uppercase letters are never auto-assigned
-        before 36 colours are in use, so they are safe names)."""
+        """Register a single-glyph color. Check for collisions with the existing palette:
+        detailed sprites may already use uppercase letters and punctuation.
+        """
         self.pal[symbol] = tuple(int(v) for v in rgb)
 
     def add_colours(self, mapping: dict):
